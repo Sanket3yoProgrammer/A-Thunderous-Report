@@ -2,8 +2,39 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Does My Phone Attract Lightning? — A 19-Factor Audit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Does My Phone Attract Lightning? — A 19-Factor Physics Audit</title>
+
+<meta name="description" content="A 19-factor physics, probability, and game-theory audit of the claim that using mobile internet during a thunderstorm attracts lightning. Spoiler: it doesn't — but Mom isn't convinced.">
+<meta name="keywords" content="lightning probability, physics audit, electromagnetism, Bayesian inference, game theory, thunderstorm myth, science humor, mobile internet lightning myth">
+<meta name="author" content="sanketyoprogrammer">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://example.com/does-phone-attract-lightning">
+
+<!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Does My Phone Attract Lightning? — A 19-Factor Physics Audit">
+<meta property="og:description" content="Electromagnetism, Bayesian inference, queueing theory, game theory — 19 factors deployed against one mom's hypothesis. Final probability: 1.08 × 10⁻¹⁶.">
+<meta property="og:image" content="https://example.com/assets/lightning-og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://example.com/does-phone-attract-lightning">
+<meta property="og:site_name" content="Case File 0619">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Does My Phone Attract Lightning? — A 19-Factor Physics Audit">
+<meta name="twitter:description" content="Electromagnetism, Bayesian inference, queueing theory, game theory — 19 factors deployed against one mom's hypothesis. Final probability: 1.08 × 10⁻¹⁶.">
+<meta name="twitter:image" content="https://example.com/assets/lightning-og-card.png">
+
+<!-- Theme / PWA-ish polish -->
+<meta name="theme-color" content="#05070a">
+<meta name="color-scheme" content="dark">
+
+<!-- Favicon (inline SVG lightning bolt, no external asset needed) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%2305070a'/%3E%3Cpath d='M13 2 5 14h5l-1 8 9-13h-6z' fill='%239b7bff'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%2305070a'/%3E%3Cpath d='M13 2 5 14h5l-1 8 9-13h-6z' fill='%239b7bff'/%3E%3C/svg%3E">
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
@@ -66,8 +97,10 @@
   }
 
   #bolt-canvas{
-    position:absolute; inset:0;
+    position:absolute; top:0; left:0;
+    display:block;
     width:100%; height:100%;
+    min-height:100vh;
     z-index:0;
     opacity:0.65;
   }
@@ -221,16 +254,18 @@
 
   /* ============ MAIN LAYOUT / SPINE ============ */
   .report{
+    --rail: 48px;          /* horizontal gutter where the spine + nodes live */
     position:relative;
-    max-width:920px;
+    max-width:760px;
     margin:0 auto;
-    padding:0 6vw 14vh;
+    padding:0 24px 14vh;
+    padding-left:calc(var(--rail) + 24px);
     z-index:2;
   }
 
   .spine{
     position:absolute;
-    left:6vw;
+    left:var(--rail);
     top:0;
     bottom:0;
     width:2px;
@@ -238,7 +273,7 @@
   }
   .spine-fill{
     position:absolute;
-    left:6vw;
+    left:var(--rail);
     top:0;
     width:2px;
     height:0%;
@@ -249,7 +284,7 @@
 
   @media (max-width:760px){
     .spine, .spine-fill{display:none;}
-    .report{padding:0 6vw 12vh;}
+    .report{padding-left:6vw; padding-right:6vw; padding-bottom:12vh;}
   }
 
   .intro-block{
@@ -286,7 +321,6 @@
   /* ============ SECTION CARDS ============ */
   .factor{
     position:relative;
-    padding-left:54px;
     margin-bottom:54px;
     opacity:0;
     transform:translateY(24px);
@@ -294,16 +328,12 @@
   }
   .factor.visible{opacity:1; transform:translateY(0);}
 
-  @media (max-width:760px){
-    .factor{padding-left:0;}
-  }
-
   .node{
     position:absolute;
-    left:-6vw;
+    left:calc(-1 * var(--rail));
     top:6px;
     width:14px; height:14px;
-    transform:translateX(calc(-7px + 1px));
+    margin-left:calc((var(--rail) - 14px) / 2 - 1px);
     border-radius:50%;
     background:var(--panel);
     border:2px solid var(--line);
@@ -564,12 +594,7 @@
 
   /* ============ RESPONSIVE SYSTEM ============ */
 
-  /* Tablet / narrow desktop */
-  @media (max-width:1024px){
-    .report{max-width:760px;}
-  }
-
-  /* Large phones / small tablets */
+  /* Large phones / small tablets — spine disappears, switch to flat padding */
   @media (max-width:760px){
     .hero{padding:5vh 7vw 8vh; min-height:92vh;}
     .factor-card{padding:24px 22px 22px; border-radius:18px;}
@@ -596,7 +621,7 @@
 
   /* Small phones */
   @media (max-width:400px){
-    .report{padding:0 5.5vw 10vh;}
+    .report{padding-left:5.5vw !important; padding-right:5.5vw !important; padding-bottom:10vh !important;}
     .factor-card{padding:20px 18px;}
     .factor-head{gap:8px;}
     .factor-num{font-size:0.7rem;}
@@ -611,9 +636,19 @@
     .hero{min-height:auto; padding:14vh 6vw 8vh;}
   }
 
-  /* Large desktop — let the canvas/report breathe, cap line lengths */
-  @media (min-width:1400px){
-    .report{max-width:980px;}
+  /* Tablet and up — widen the rail slightly, give the report more breathing room */
+  @media (min-width:761px) and (max-width:1199px){
+    .report{max-width:700px;}
+  }
+
+  /* Desktop */
+  @media (min-width:1200px){
+    .report{max-width:800px; --rail: 56px;}
+  }
+
+  /* Large desktop — wider canvas, longer line lengths, bigger rail */
+  @media (min-width:1600px){
+    .report{max-width:880px; --rail: 64px;}
     .intro-block .lede{max-width:680px;}
   }
 
@@ -637,7 +672,8 @@
     <div class="stat"><div class="stat-label">Factors tested</div><div class="stat-value">19</div></div>
     <div class="stat"><div class="stat-label">Fields of physics</div><div class="stat-value">3 + diplomacy</div></div>
   </div>
-  </section>
+  
+</section>
 
 <!-- ===================== REPORT ===================== -->
 <div class="report">
@@ -675,4 +711,306 @@
   <div class="factor"><div class="node"></div><div class="factor-card">
     <div class="factor-head"><span class="factor-num">04 / SHIELDING</span><h3 class="factor-title">Faraday-cage effect of the rebar</h3></div>
     <div class="eq-block">SE = 20·log₁₀(λ_wave / 2d) ≈ 46 dB<br>F_s = 10^(−SE/20) ≈ <span class="res">5.01 × 10⁻³</span></div>
-    <p class="factor-note">Reinforced concrete is an acci
+    <p class="factor-note">Reinforced concrete is an accidental <strong>Faraday cage</strong>. The walls are doing unpaid security work.</p>
+  </div></div>
+
+  <!-- FACTOR 5 -->
+  <div class="factor"><div class="node"></div><div class="factor-card">
+    <div class="factor-head"><span class="factor-num">05 / DISTANCE</span><h3 class="factor-title">Attenuation from the grill to my chair</h3></div>
+    <div class="eq-block">P ∝ (1/r²)·e^(−r/L) = (1/4)·e⁻¹⁰ ≈ <span class="res">1.14 × 10⁻⁵</span></div>
+    <p class="factor-note">Two meters of air does more work than it gets credit for.</p>
+  </div></div>
+
+  <!-- FACTOR 6 -->
+  <div class="factor"><div class="node"></div><div class="factor-card">
+    <div class="factor-head"><span class="factor-num">06 / CIRCUITS</span><h3 class="factor-title">Current divider: rebar vs. me</h3></div>
+    <div class="eq-block">I_h / I_tot = R_s / (R_s + R_h) = 0.1 / 1000.1 ≈ <span class="res">10⁻⁴</span></div>
+    <p class="factor-note">The rebar network is <strong>10,000× more attractive</strong> to current than my body is. Electrons are not sentimental.</p>
+  </div></div>
+
+  <!-- FACTOR 7 -->
+  <div class="factor"><div class="node"></div><div class="factor-card">
+    <div class="factor-head"><span class="factor-num">07 / BAYES</span><h3 class="factor-title">Bayesian independence check</h3></div>
+    <div class="eq-block">P(M|L) ≈ P(M)&nbsp;&nbsp;⟹&nbsp;&nbsp;P(L|M) ≈ <span class="res">P(L)</span></div>
+    <p class="factor-note">Whether my data is on tells you <strong>nothing</strong> about whether lightning falls.</p>
+  </div></div>
+
+  <!-- FACTOR 8 -->
+  <div class="factor"><div class="node"></div><div class="factor-card">
+    <div class="factor-head"><span class="factor-num">08 / INFORMATION</span><h3 class="factor-title">Mutual information of WiFi and lightning</h3></div>
+    <div class="eq-block">I(L;M) = ΣP(l,m)·log[P(l,m)/P(l)P(m)] = log(1) = <span class="res">0 bits</span></div>
+    <p class="factor-note">My WiFi toggle predicts lightning <strong>worse than a coin flip</strong> would.</p>
+  </div></div>
+
+  <!-- FACTOR 9 -->
+  <div class="factor"><div class="node"></div><div class="factor-card">
+    <div class="factor-head"><span class="factor-num">09 / QUANTUM</span><h3 class="factor-title">Can a 5G photon ionize air?</h3></div>
+    <div class="eq-block">E_photon ≈ 2×10⁻²⁴ J&nbsp;&nbsp;&nbsp;&nbsp;E_ionize ≈ 2.3×10⁻¹⁸ J<br>Ratio ≈ <span class="res">8.7 × 10⁻⁷</span></div>
+    <p class="factor-note">Short by a <strong>million-fold</strong>. The signal can't even nudge a nitrogen molecule.</p>
+  </div></div>
+
+  <!-- FACTOR 10 -->
+  <div class="factor"><div class="node"></div><div class="factor-card">
+    <div class="factor-head"><span class="factor-num">10 / QUEUEING</span><h3 class="factor-title">Who absorbs the strike, modeled as a queue</h3></div>
+    <div class="eq-block">P(human) = μ_h / Σμ = 1 / 10,051 ≈ <span class="res">9.95 × 10⁻⁵</span></div>
+    <p class="factor-note">Agrees with the circuit model in Factor 6, independently. <strong>Two methods, same answer.</strong></p>
+  </div></div>
+
+  <!-- FACTOR 11 -->
+  <div class="factor"><div class="node"></div><div class="factor-card">
+    <div class="factor-head"><span class="factor-num">11 / SIMULATION</span><h3 class="factor-title">One million simulated thunderstorms</h3></div>
+    <div class="eq-block">N_phone = 10⁶ × P_total ≪ 1&nbsp;&nbsp;&nbsp;&nbsp;N_mom = 10⁶ × 1.0 = <span class="res">1,000,000</span></div>
+    <p class="factor-note">In every simulated universe, the phone is innocent. In every one, <strong>Mom is convinced anyway</strong>.</p>
+  </div></div>
+
+  <!-- FACTOR 12 -->
+  <div class="factor"><div class="node"></div><div class="factor-card">
+    <div class="factor-head"><span class="factor-num">12 / BENCHMARK</span><h3 class="factor-title">How this stacks up against real risk</h3></div>
+    <table class="cmp">
+      <tr><th>Event</th><th>Probability</th></tr>
+      <tr><td>Struck by lightning, lifetime</td><td>1 / 15,000</td></tr>
+      <tr><td>Win a national lottery</td><td>1 / 10⁸</td></tr>
+      <tr><td>Die in a car accident, lifetime</td><td>1 / 100</td></tr>
+      <tr><td>This exact scenario</td><td>1 / 10¹⁵–10¹⁷</td></tr>
+    </table>
+    <p class="factor-note">I'm in more danger buying the lottery ticket on the way to unplugging the router.</p>
+  </div></div>
+
+  <!-- FACTOR 13 -->
+  <div class="factor"><div class="node"></div><div class="factor-card">
+    <div class="factor-head"><span class="factor-num">13 / SYNTHESIS</span><h3 class="factor-title">The combined estimate</h3></div>
+    <div class="eq-block">P_total = (9.99×10⁻⁴)(0.190)(5.01×10⁻³)(1.14×10⁻⁵)(10⁻⁴)<br><span class="res">P_total ≈ 1.08 × 10⁻¹⁶</span></div>
+    <div class="result-pill">≈ 1 in 9.3 quadrillion</div>
+    <p class="factor-note">Worse odds than naming one specific grain of sand on Earth — <em class="flag">twice in a row</em>.</p>
+  </div></div>
+
+  <!-- FACTOR 14 -->
+  <div class="factor"><div class="node"></div><div class="factor-card">
+    <div class="factor-head"><span class="factor-num">14 / CONSEQUENCE</span><h3 class="factor-title">If it somehow happened anyway</h3></div>
+    <div class="eq-block">E = I²Rτ = (3)²(1000)(10⁻³) = <span class="res">9 J</span></div>
+    <p class="factor-note">About what you'd feel dropping a 1&nbsp;kg weight from 0.9&nbsp;m onto your foot. Bad day, survivable.</p>
+  </div></div>
+
+  <!-- FACTOR 15 -->
+  <div class="factor"><div class="node"></div><div class="factor-card">
+    <div class="factor-head"><span class="factor-num">15 / DECISION</span><h3 class="factor-title">Expected utility of switching off</h3></div>
+    <div class="eq-block">EU(WiFi On) ≈ P_total × severity ≈ <span class="res">0</span></div>
+    <p class="factor-note">Physics renders a verdict of <strong>complete indifference</strong>.</p>
+  </div></div>
+
+  <!-- FACTOR 16 -->
+  <div class="factor"><div class="node"></div><div class="factor-card">
+    <div class="factor-head"><span class="factor-num">16 / GAME THEORY</span><h3 class="factor-title">The actual opponent: Mom</h3></div>
+    <table class="cmp">
+      <tr><th></th><th>Trust (3%)</th><th>Worry (97%)</th></tr>
+      <tr><td>WiFi On</td><td>+10</td><td>−8</td></tr>
+      <tr><td>WiFi Off</td><td>+6</td><td>+9</td></tr>
+      <tr><td>Expected value</td><td colspan="2">Off wins: <strong>+8.91 vs −7.46</strong></td></tr>
+    </table>
+    <p class="factor-note">The dominant strategy was never about electromagnetism. It was about <strong>Mom</strong>.</p>
+  </div></div>
+
+  <!-- FACTOR 17 -->
+  <div class="factor"><div class="node"></div><div class="factor-card">
+    <div class="factor-head"><span class="factor-num">17 / ENTROPY</span><h3 class="factor-title">Heat death of the original claim</h3></div>
+    <div class="eq-block">S ∝ −log₁₀(1.08×10⁻¹⁶) ≈ <span class="res">15.97</span></div>
+    <p class="factor-note">The claim is now <strong>thermodynamically dead</strong>. It cannot be un-disproven.</p>
+  </div></div>
+
+  <!-- FACTOR 18 -->
+  <div class="factor"><div class="node"></div><div class="factor-card">
+    <div class="factor-head"><span class="factor-num">18 / AUDIT</span><h3 class="factor-title">Dimensional consistency check</h3></div>
+    <div class="eq-block">[N_g][A] = strikes·yr⁻¹ ✓&nbsp;&nbsp;&nbsp;&nbsp;all F_i dimensionless ✓</div>
+    <p class="factor-note">The model's units check out. The original claim's units were <strong>vibes</strong>.</p>
+  </div></div>
+
+  <!-- FACTOR 19 -->
+  <div class="factor"><div class="node"></div><div class="factor-card">
+    <div class="factor-head"><span class="factor-num">19 / IRREDUCIBLE</span><h3 class="factor-title">The one term that never cancels</h3></div>
+    <div class="eq-block">R = P_total^(physics) × κ^(procrastination),&nbsp;&nbsp;κ ≫ 1</div>
+    <p class="factor-note">No matter how small the physics gets, board-exam guilt dominates the outcome. <strong>I was the variable all along.</strong></p>
+  </div></div>
+
+  <!-- ===================== FINALE ===================== -->
+  <div class="finale">
+    <h2>Final scoreboard</h2>
+    <p class="sub">Nineteen factors, three branches of physics, one branch of household diplomacy.</p>
+
+    <div class="scoreboard">
+      <div class="score-cell glow"><div class="k">P(struck because of phone)</div><div class="v">1.08 × 10⁻¹⁶</div></div>
+      <div class="score-cell"><div class="k">P(WhatsApp loads fine)</div><div class="v">high</div></div>
+      <div class="score-cell amber"><div class="k">P(Mom says switch it off)</div><div class="v">1.00</div></div>
+      <div class="score-cell amber"><div class="k">P(I switch it off anyway)</div><div class="v">1.00</div></div>
+    </div>
+
+    <div class="proof-box">
+      <div class="proof-label">Proof</div>
+      <p class="proof-line">Since <span class="mono-inline">1 ≫ 1.08 × 10⁻¹⁶</span>, the dominant term in this system is not electromagnetism, not Bayesian inference, not queueing theory —</p>
+      <p class="proof-line">it is <strong>maternal certainty</strong>, a force which has now been confirmed independently across nineteen sections and zero counterexamples.</p>
+      <p class="proof-conclusion">Conclusion: P(Mom tells me to switch off the phone) = 1. Mom remains the dominant force in the system. 🗿⚡</p>
+      <div class="qed-row"><span class="qed-mark">Q.E.D.</span><span class="qed-tag">Verified experimentally. 🗿⚡</span></div>
+    </div>
+
+    <footer class="report-footer">
+      <div class="footer-rule"></div>
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-mark">⚡ Case 0619</div>
+          <div class="footer-meta">Filed 21 June 2026 · Jharsuguda, Odisha</div>
+        </div>
+        <div class="footer-col right">
+          <div class="footer-meta">Author</div>
+          <div class="footer-author">sanketyoprogrammer</div>
+          <div class="footer-meta dim">Class 12, PCM · professional overthinker</div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+</div>
+
+<script>
+  // ---- scroll-triggered factor reveal + spine fill ----
+  const factors = document.querySelectorAll('.factor');
+  const spineFill = document.getElementById('spineFill');
+  const report = document.querySelector('.report');
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, {threshold:0.2});
+  factors.forEach(f=>io.observe(f));
+
+  function updateSpine(){
+    const rect = report.getBoundingClientRect();
+    const total = report.offsetHeight;
+    const viewed = Math.min(Math.max(-rect.top + window.innerHeight*0.5, 0), total);
+    const pct = (viewed/total)*100;
+    spineFill.style.height = pct + '%';
+  }
+  window.addEventListener('scroll', updateSpine);
+  window.addEventListener('resize', updateSpine);
+  updateSpine();
+
+  // ---- hero lightning bolt canvas animation ----
+  const canvas = document.getElementById('bolt-canvas');
+  const ctx = canvas.getContext('2d');
+  let w = 0, h = 0, dpr = 1;
+
+  function resize(){
+    const rect = canvas.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = Math.max(Math.round(rect.width), 1);
+    h = Math.max(Math.round(rect.height), 1);
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+
+  window.addEventListener('resize', resize);
+  window.addEventListener('load', resize);
+  if(window.ResizeObserver){
+    new ResizeObserver(resize).observe(canvas);
+  }
+  resize();
+
+  function generateBolt(x0,y0,x1,y1,displace){
+    if(displace < 6){
+      return [[x0,y0],[x1,y1]];
+    }
+    const midx = (x0+x1)/2 + (Math.random()-0.5)*displace;
+    const midy = (y0+y1)/2 + (Math.random()-0.5)*displace*0.4;
+    const left = generateBolt(x0,y0,midx,midy,displace/2);
+    const right = generateBolt(midx,midy,x1,y1,displace/2);
+    return left.slice(0,-1).concat(right);
+  }
+
+  function drawBoltPath(points, alpha, color, width){
+    ctx.beginPath();
+    ctx.moveTo(points[0][0], points[0][1]);
+    for(let i=1;i<points.length;i++) ctx.lineTo(points[i][0], points[i][1]);
+    ctx.strokeStyle = color;
+    ctx.globalAlpha = alpha;
+    ctx.lineWidth = width;
+    ctx.lineCap = 'round';
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 18;
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+    ctx.shadowBlur = 0;
+  }
+
+  let strikes = [];
+  function spawnStrike(){
+    const x0 = w*(0.25 + Math.random()*0.5);
+    const y0 = -10;
+    const x1 = x0 + (Math.random()-0.5)*140;
+    const y1 = h*(0.55 + Math.random()*0.3);
+    const main = generateBolt(x0,y0,x1,y1, 90);
+    const branches = [];
+    for(let i=2;i<main.length-2;i+=3){
+      if(Math.random()<0.5){
+        const bx = main[i][0] + (Math.random()-0.5)*120;
+        const by = main[i][1] + 60 + Math.random()*60;
+        branches.push(generateBolt(main[i][0], main[i][1], bx, by, 30));
+      }
+    }
+    strikes.push({main, branches, life:0, maxLife: 16 + Math.random()*8});
+  }
+
+  let frame = 0;
+  function loop(){
+    frame++;
+    if(w < 2 || h < 2){
+      requestAnimationFrame(loop);
+      return;
+    }
+    ctx.clearRect(0,0,w,h);
+
+    // ambient faint grid glow
+    ctx.globalAlpha = 0.04;
+    ctx.fillStyle = '#9b7bff';
+    for(let i=0;i<3;i++){
+      ctx.beginPath();
+      ctx.arc(w*0.5, h*0.3, 200+i*120, 0, Math.PI*2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    if(frame % 130 === 0 && strikes.length < 2){
+      spawnStrike();
+    }
+
+    strikes.forEach(s=>{
+      s.life++;
+      const t = s.life / s.maxLife;
+      let alpha = 1;
+      if(t < 0.15) alpha = t/0.15;
+      else if(t > 0.5) alpha = Math.max(0, 1 - (t-0.5)/0.5);
+
+      if(s.life < s.maxLife*0.4){
+        // flash overlay during initial strike
+        ctx.fillStyle = '#9b7bff';
+        ctx.globalAlpha = (1-t/0.4)*0.05;
+        ctx.fillRect(0,0,w,h);
+        ctx.globalAlpha = 1;
+      }
+
+      drawBoltPath(s.main, alpha, '#c9b8ff', 2.4);
+      drawBoltPath(s.main, alpha*0.5, '#ffffff', 1);
+      s.branches.forEach(b=> drawBoltPath(b, alpha*0.6, '#9b7bff', 1.4));
+    });
+
+    strikes = strikes.filter(s=>s.life < s.maxLife);
+
+    requestAnimationFrame(loop);
+  }
+  loop();
+
+  // trigger an immediate strike shortly after load
+  setTimeout(spawnStrike, 500);
+</script>
+
+</body>
+</html>
